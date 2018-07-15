@@ -1,0 +1,8 @@
+#!/bin/ash
+# $1 ssid which you want to connect
+cd /opt/wifi
+iwconfig wlan0 essid "$1"
+echo "Enter password. for " $1
+wpa_passphrase "$1">"$1"
+wpa_supplicant -B -iwlan0 -c "./$1"
+udhcpc -i wlan0
